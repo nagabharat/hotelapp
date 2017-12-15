@@ -1,0 +1,47 @@
+
+<div *ngIf="bills">
+    <h2><span jhiTranslate="hotelApp.bills.detail.title">Bills</span> {{bills.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="hotelApp.bills.billAmount">Bill Amount</span></dt>
+        <dd>
+            <span>{{bills.billAmount}}</span>
+        </dd>
+        <dt><span jhiTranslate="hotelApp.bills.billdate">Billdate</span></dt>
+        <dd>
+            <span>{{bills.billdate | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span jhiTranslate="hotelApp.bills.billType">Bill Type</span></dt>
+        <dd>
+            <span jhiTranslate="{{'hotelApp.BillType.' + bills.billType}}">{{bills.billType}}</span>
+        </dd>
+        <dt><span jhiTranslate="hotelApp.bills.billImage">Bill Image</span></dt>
+        <dd>
+            <div *ngIf="bills.billImage">
+                <a (click)="openFile(bills.billImageContentType, bills.billImage)" jhiTranslate="entity.action.open">open</a>
+                {{bills.billImageContentType}}, {{byteSize(bills.billImage)}}
+            </div>
+        </dd>
+        <dt><span jhiTranslate="hotelApp.bills.filedBy">Filed By</span></dt>
+        <dd>
+            <div *ngIf="bills.filedById">
+                <a [routerLink]="['/employee-my-suffix', bills.filedById]">{{bills.filedById}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'bills-my-suffix/'+ bills.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

@@ -1,0 +1,10 @@
+{
+    "hotelApp": {
+        "PettyCashSetting" : {
+            "null": "",
+            "TEA": "TEA",
+            "FUEL": "FUEL",
+            "OTHER": "OTHER"
+        }
+    }
+}

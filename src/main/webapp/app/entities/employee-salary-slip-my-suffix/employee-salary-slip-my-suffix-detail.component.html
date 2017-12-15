@@ -1,0 +1,38 @@
+
+<div *ngIf="employeeSalarySlip">
+    <h2><span jhiTranslate="hotelApp.employeeSalarySlip.detail.title">Employee Salary Slip</span> {{employeeSalarySlip.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="hotelApp.employeeSalarySlip.gross">Gross</span></dt>
+        <dd>
+            <span>{{employeeSalarySlip.gross}}</span>
+        </dd>
+        <dt><span jhiTranslate="hotelApp.employeeSalarySlip.month">Month</span></dt>
+        <dd>
+            <div *ngIf="employeeSalarySlip.monthId">
+                <a [routerLink]="['/month-of-year-my-suffix', employeeSalarySlip.monthId]">{{employeeSalarySlip.monthId}}</a>
+            </div>
+        </dd>
+        <dt><span jhiTranslate="hotelApp.employeeSalarySlip.employee">Employee</span></dt>
+        <dd>
+            <div *ngIf="employeeSalarySlip.employeeId">
+                <a [routerLink]="['/employee-my-suffix', employeeSalarySlip.employeeId]">{{employeeSalarySlip.employeeId}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'employee-salary-slip-my-suffix/'+ employeeSalarySlip.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

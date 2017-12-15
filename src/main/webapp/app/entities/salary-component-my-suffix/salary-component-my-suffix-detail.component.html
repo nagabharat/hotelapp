@@ -1,0 +1,38 @@
+
+<div *ngIf="salaryComponent">
+    <h2><span jhiTranslate="hotelApp.salaryComponent.detail.title">Salary Component</span> {{salaryComponent.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="hotelApp.salaryComponent.name">Name</span></dt>
+        <dd>
+            <span>{{salaryComponent.name}}</span>
+        </dd>
+        <dt><span jhiTranslate="hotelApp.salaryComponent.grossPercent">Gross Percent</span></dt>
+        <dd>
+            <span>{{salaryComponent.grossPercent}}</span>
+        </dd>
+        <dt><span jhiTranslate="hotelApp.salaryComponent.dateOfJoining">Date Of Joining</span></dt>
+        <dd>
+            <span>{{salaryComponent.dateOfJoining | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span jhiTranslate="hotelApp.salaryComponent.deduction">Deduction</span></dt>
+        <dd>
+            <span>{{salaryComponent.deduction}}</span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'salary-component-my-suffix/'+ salaryComponent.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

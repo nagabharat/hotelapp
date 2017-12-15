@@ -1,0 +1,78 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="mySalaryComponentLabel" jhiTranslate="hotelApp.salaryComponent.home.createOrEditLabel">Create or edit a Salary Component</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]="!salaryComponent.id">
+            <label for="id" jhiTranslate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="salaryComponent.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="hotelApp.salaryComponent.name" for="field_name">Name</label>
+            <input type="text" class="form-control" name="name" id="field_name"
+                [(ngModel)]="salaryComponent.name" required/>
+            <div [hidden]="!(editForm.controls.name?.dirty && editForm.controls.name?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.name?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="hotelApp.salaryComponent.grossPercent" for="field_grossPercent">Gross Percent</label>
+            <input type="number" class="form-control" name="grossPercent" id="field_grossPercent"
+                [(ngModel)]="salaryComponent.grossPercent" required/>
+            <div [hidden]="!(editForm.controls.grossPercent?.dirty && editForm.controls.grossPercent?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.grossPercent?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.grossPercent?.errors?.number" jhiTranslate="entity.validation.number">
+                    This field should be a number.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="hotelApp.salaryComponent.dateOfJoining" for="field_dateOfJoining">Date Of Joining</label>
+            <div class="input-group">
+                <input id="field_dateOfJoining" type="text" class="form-control" name="dateOfJoining" ngbDatepicker  #dateOfJoiningDp="ngbDatepicker" [(ngModel)]="salaryComponent.dateOfJoining"
+                required/>
+                <span class="input-group-btn">
+                    <button type="button" class="btn btn-secondary" (click)="dateOfJoiningDp.toggle()"><i class="fa fa-calendar"></i></button>
+                </span>
+            </div>
+            <div [hidden]="!(editForm.controls.dateOfJoining?.dirty && editForm.controls.dateOfJoining?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.dateOfJoining?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="hotelApp.salaryComponent.deduction" for="field_deduction">Deduction</label>
+            <input type="checkbox" class="form-control" name="deduction" id="field_deduction"
+                [(ngModel)]="salaryComponent.deduction" />
+            <div [hidden]="!(editForm.controls.deduction?.dirty && editForm.controls.deduction?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.deduction?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+            </div>
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

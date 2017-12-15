@@ -1,0 +1,66 @@
+<div>
+    <h2>
+        <span jhiTranslate="hotelApp.room.home.title">Rooms</span>
+        <button class="btn btn-primary float-right jh-create-entity create-room-my-suffix" [routerLink]="['/', { outlets: { popup: ['room-my-suffix-new'] } }]">
+            <span class="fa fa-plus"></span>
+            <span  jhiTranslate="hotelApp.room.home.createLabel">
+            Create new Room
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <div class="row">
+    </div>
+    <br/>
+    <div class="table-responsive" *ngIf="rooms">
+        <table class="table table-striped">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="reset.bind(this)">
+            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="roomName"><span jhiTranslate="hotelApp.room.roomName">Room Name</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="roomType"><span jhiTranslate="hotelApp.room.roomType">Room Type</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="bookingId"><span jhiTranslate="hotelApp.room.booking">Booking</span> <span class="fa fa-sort"></span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0">
+            <tr *ngFor="let room of rooms ;trackBy: trackId">
+                <td><a [routerLink]="['../room-my-suffix', room.id ]">{{room.id}}</a></td>
+                <td>{{room.roomName}}</td>
+                <td jhiTranslate="{{'hotelApp.RoomType.' + room.roomType}}">{{room.roomType}}</td>
+                <td>
+                    <div *ngIf="room.bookingId">
+                        <a [routerLink]="['../booking-my-suffix', room.bookingId  ]" >{{room.bookingId}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['../room-my-suffix', room.id ]"
+                                class="btn btn-info btn-sm">
+                            <span class="fa fa-eye"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'room-my-suffix/'+ room.id + '/edit'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-primary btn-sm">
+                            <span class="fa fa-pencil"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'room-my-suffix/'+ room.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <span class="fa fa-remove"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

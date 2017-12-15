@@ -1,0 +1,23 @@
+{
+    "hotelApp": {
+        "employeeSalarySlip" : {
+            "home": {
+                "title": "Employee Salary Slips",
+                "createLabel": "Create a new Employee Salary Slip",
+                "createOrEditLabel": "Create or edit a Employee Salary Slip"
+            },
+            "created": "A new Employee Salary Slip is created with identifier {{ param }}",
+            "updated": "A Employee Salary Slip is updated with identifier {{ param }}",
+            "deleted": "A Employee Salary Slip is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Employee Salary Slip {{ id }}?"
+            },
+            "detail": {
+                "title": "Employee Salary Slip"
+            },
+            "gross": "Gross",
+            "month": "Month",
+            "employee": "Employee"
+        }
+    }
+}

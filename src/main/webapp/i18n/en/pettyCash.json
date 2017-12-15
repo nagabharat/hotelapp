@@ -1,0 +1,24 @@
+{
+    "hotelApp": {
+        "pettyCash" : {
+            "home": {
+                "title": "Petty Cashes",
+                "createLabel": "Create a new Petty Cash",
+                "createOrEditLabel": "Create or edit a Petty Cash"
+            },
+            "created": "A new Petty Cash is created with identifier {{ param }}",
+            "updated": "A Petty Cash is updated with identifier {{ param }}",
+            "deleted": "A Petty Cash is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Petty Cash {{ id }}?"
+            },
+            "detail": {
+                "title": "Petty Cash"
+            },
+            "pettyCashSettings": "Petty Cash Settings",
+            "amount": "Amount",
+            "billdate": "Billdate",
+            "filedBy": "Filed By"
+        }
+    }
+}

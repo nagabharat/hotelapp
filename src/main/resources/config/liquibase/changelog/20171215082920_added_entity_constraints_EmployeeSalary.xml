@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <!--
+        Added the constraints for entity EmployeeSalary.
+    -->
+    <changeSet id="20171215082920-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="changed_month_id"
+                                 baseTableName="employee_salary"
+                                 constraintName="fk_employee_salary_changed_month_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="month_of_year"/>
+
+        <addForeignKeyConstraint baseColumnNames="employee_id"
+                                 baseTableName="employee_salary"
+                                 constraintName="fk_employee_salary_employee_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="employee"/>
+
+    </changeSet>
+</databaseChangeLog>

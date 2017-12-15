@@ -1,0 +1,68 @@
+<div>
+    <h2>
+        <span jhiTranslate="hotelApp.pettyCash.home.title">Petty Cashes</span>
+        <button class="btn btn-primary float-right jh-create-entity create-petty-cash-my-suffix" [routerLink]="['/', { outlets: { popup: ['petty-cash-my-suffix-new'] } }]">
+            <span class="fa fa-plus"></span>
+            <span  jhiTranslate="hotelApp.pettyCash.home.createLabel">
+            Create new Petty Cash
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <div class="row">
+    </div>
+    <br/>
+    <div class="table-responsive" *ngIf="pettyCashes">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+            <th><span jhiTranslate="global.field.id">ID</span></th>
+            <th><span jhiTranslate="hotelApp.pettyCash.pettyCashSettings">Petty Cash Settings</span></th>
+            <th><span jhiTranslate="hotelApp.pettyCash.amount">Amount</span></th>
+            <th><span jhiTranslate="hotelApp.pettyCash.billdate">Billdate</span></th>
+            <th><span jhiTranslate="hotelApp.pettyCash.filedBy">Filed By</span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let pettyCash of pettyCashes ;trackBy: trackId">
+                <td><a [routerLink]="['../petty-cash-my-suffix', pettyCash.id ]">{{pettyCash.id}}</a></td>
+                <td jhiTranslate="{{'hotelApp.PettyCashSetting.' + pettyCash.pettyCashSettings}}">{{pettyCash.pettyCashSettings}}</td>
+                <td>{{pettyCash.amount}}</td>
+                <td>{{pettyCash.billdate | date:'mediumDate'}}</td>
+                <td>
+                    <div *ngIf="pettyCash.filedById">
+                        <a [routerLink]="['../employee-my-suffix', pettyCash.filedById  ]" >{{pettyCash.filedById}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['../petty-cash-my-suffix', pettyCash.id ]"
+                                class="btn btn-info btn-sm">
+                            <span class="fa fa-eye"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'petty-cash-my-suffix/'+ pettyCash.id + '/edit'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-primary btn-sm">
+                            <span class="fa fa-pencil"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'petty-cash-my-suffix/'+ pettyCash.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <span class="fa fa-remove"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

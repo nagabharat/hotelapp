@@ -1,0 +1,70 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myEmployeeLabel" jhiTranslate="hotelApp.employee.home.createOrEditLabel">Create or edit a Employee</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]="!employee.id">
+            <label for="id" jhiTranslate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="employee.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="hotelApp.employee.empNumber" for="field_empNumber">Emp Number</label>
+            <input type="text" class="form-control" name="empNumber" id="field_empNumber"
+                [(ngModel)]="employee.empNumber" required/>
+            <div [hidden]="!(editForm.controls.empNumber?.dirty && editForm.controls.empNumber?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.empNumber?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="hotelApp.employee.fullName" for="field_fullName">Full Name</label>
+            <input type="text" class="form-control" name="fullName" id="field_fullName"
+                [(ngModel)]="employee.fullName" required/>
+            <div [hidden]="!(editForm.controls.fullName?.dirty && editForm.controls.fullName?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.fullName?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="hotelApp.employee.dateOfJoining" for="field_dateOfJoining">Date Of Joining</label>
+            <div class="input-group">
+                <input id="field_dateOfJoining" type="text" class="form-control" name="dateOfJoining" ngbDatepicker  #dateOfJoiningDp="ngbDatepicker" [(ngModel)]="employee.dateOfJoining"
+                required/>
+                <span class="input-group-btn">
+                    <button type="button" class="btn btn-secondary" (click)="dateOfJoiningDp.toggle()"><i class="fa fa-calendar"></i></button>
+                </span>
+            </div>
+            <div [hidden]="!(editForm.controls.dateOfJoining?.dirty && editForm.controls.dateOfJoining?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.dateOfJoining?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="hotelApp.employee.manager" for="field_manager">Manager</label>
+            <select class="form-control" id="field_manager" name="manager" [(ngModel)]="employee.managerId" >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="employeeOption.id" *ngFor="let employeeOption of employees; trackBy: trackEmployeeById">{{employeeOption.id}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

@@ -1,0 +1,9 @@
+{
+    "hotelApp": {
+        "RoomType" : {
+            "null": "",
+            "AC": "AC",
+            "NON_AC": "NON_AC"
+        }
+    }
+}

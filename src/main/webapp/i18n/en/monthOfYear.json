@@ -1,0 +1,22 @@
+{
+    "hotelApp": {
+        "monthOfYear" : {
+            "home": {
+                "title": "Month Of Years",
+                "createLabel": "Create a new Month Of Year",
+                "createOrEditLabel": "Create or edit a Month Of Year"
+            },
+            "created": "A new Month Of Year is created with identifier {{ param }}",
+            "updated": "A Month Of Year is updated with identifier {{ param }}",
+            "deleted": "A Month Of Year is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Month Of Year {{ id }}?"
+            },
+            "detail": {
+                "title": "Month Of Year"
+            },
+            "year": "Year",
+            "month": "Month"
+        }
+    }
+}

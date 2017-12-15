@@ -1,0 +1,30 @@
+
+<div *ngIf="monthOfYear">
+    <h2><span jhiTranslate="hotelApp.monthOfYear.detail.title">Month Of Year</span> {{monthOfYear.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="hotelApp.monthOfYear.year">Year</span></dt>
+        <dd>
+            <span>{{monthOfYear.year}}</span>
+        </dd>
+        <dt><span jhiTranslate="hotelApp.monthOfYear.month">Month</span></dt>
+        <dd>
+            <span>{{monthOfYear.month}}</span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'month-of-year-my-suffix/'+ monthOfYear.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

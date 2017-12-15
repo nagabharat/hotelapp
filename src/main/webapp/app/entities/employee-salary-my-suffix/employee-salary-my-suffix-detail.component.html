@@ -1,0 +1,38 @@
+
+<div *ngIf="employeeSalary">
+    <h2><span jhiTranslate="hotelApp.employeeSalary.detail.title">Employee Salary</span> {{employeeSalary.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="hotelApp.employeeSalary.gross">Gross</span></dt>
+        <dd>
+            <span>{{employeeSalary.gross}}</span>
+        </dd>
+        <dt><span jhiTranslate="hotelApp.employeeSalary.changedMonth">Changed Month</span></dt>
+        <dd>
+            <div *ngIf="employeeSalary.changedMonthId">
+                <a [routerLink]="['/month-of-year-my-suffix', employeeSalary.changedMonthId]">{{employeeSalary.changedMonthId}}</a>
+            </div>
+        </dd>
+        <dt><span jhiTranslate="hotelApp.employeeSalary.employee">Employee</span></dt>
+        <dd>
+            <div *ngIf="employeeSalary.employeeId">
+                <a [routerLink]="['/employee-my-suffix', employeeSalary.employeeId]">{{employeeSalary.employeeId}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'employee-salary-my-suffix/'+ employeeSalary.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

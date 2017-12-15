@@ -1,0 +1,101 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myBillsLabel" jhiTranslate="hotelApp.bills.home.createOrEditLabel">Create or edit a Bills</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]="!bills.id">
+            <label for="id" jhiTranslate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="bills.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="hotelApp.bills.billAmount" for="field_billAmount">Bill Amount</label>
+            <input type="number" class="form-control" name="billAmount" id="field_billAmount"
+                [(ngModel)]="bills.billAmount" required/>
+            <div [hidden]="!(editForm.controls.billAmount?.dirty && editForm.controls.billAmount?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.billAmount?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.billAmount?.errors?.number" jhiTranslate="entity.validation.number">
+                    This field should be a number.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="hotelApp.bills.billdate" for="field_billdate">Billdate</label>
+            <div class="input-group">
+                <input id="field_billdate" type="text" class="form-control" name="billdate" ngbDatepicker  #billdateDp="ngbDatepicker" [(ngModel)]="bills.billdate"
+                required/>
+                <span class="input-group-btn">
+                    <button type="button" class="btn btn-secondary" (click)="billdateDp.toggle()"><i class="fa fa-calendar"></i></button>
+                </span>
+            </div>
+            <div [hidden]="!(editForm.controls.billdate?.dirty && editForm.controls.billdate?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.billdate?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="hotelApp.bills.billType" for="field_billType">Bill Type</label>
+            <select class="form-control" name="billType" [(ngModel)]="bills.billType" id="field_billType"  required>
+                <option value="WATER">{{'hotelApp.BillType.WATER' | translate}}</option>
+                <option value="ELECTRICITY">{{'hotelApp.BillType.ELECTRICITY' | translate}}</option>
+                <option value="OTHER_BILLS">{{'hotelApp.BillType.OTHER_BILLS' | translate}}</option>
+            </select>
+            <div [hidden]="!(editForm.controls.billType?.dirty && editForm.controls.billType?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.billType?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="hotelApp.bills.billImage" for="field_billImage">Bill Image</label>
+            <div>
+                <div *ngIf="bills.billImage" class="form-text text-danger clearfix">
+                    <a class="pull-left" (click)="openFile(bills.billImageContentType, bills.billImage)" jhiTranslate="entity.action.open">open</a><br>
+                    <span class="pull-left">{{bills.billImageContentType}}, {{byteSize(bills.billImage)}}</span>
+                    <button type="button" (click)="bills.billImage=null;bills.billImageContentType=null;"
+                            class="btn btn-secondary btn-xs pull-right">
+                        <span class="fa fa-times"></span>
+                    </button>
+                </div>
+                <input type="file" id="file_billImage" (change)="setFileData($event, bills, 'billImage', false)" jhiTranslate="entity.action.addblob"/>
+            </div>
+            <input type="hidden" class="form-control" name="billImage" id="field_billImage"
+                [(ngModel)]="bills.billImage" required/>
+            <input type="hidden" class="form-control" name="billImageContentType" id="field_billImageContentType"
+                [(ngModel)]="bills.billImageContentType" />
+            <div [hidden]="!(editForm.controls.billImage?.dirty && editForm.controls.billImage?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.billImage?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="form-control-label" jhiTranslate="hotelApp.bills.filedBy" for="field_filedBy">Filed By</label>
+            <select class="form-control" id="field_filedBy" name="filedBy" [(ngModel)]="bills.filedById" >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="employeeOption.id" *ngFor="let employeeOption of employees; trackBy: trackEmployeeById">{{employeeOption.id}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

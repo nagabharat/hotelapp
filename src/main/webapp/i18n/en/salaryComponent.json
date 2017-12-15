@@ -1,0 +1,24 @@
+{
+    "hotelApp": {
+        "salaryComponent" : {
+            "home": {
+                "title": "Salary Components",
+                "createLabel": "Create a new Salary Component",
+                "createOrEditLabel": "Create or edit a Salary Component"
+            },
+            "created": "A new Salary Component is created with identifier {{ param }}",
+            "updated": "A Salary Component is updated with identifier {{ param }}",
+            "deleted": "A Salary Component is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Salary Component {{ id }}?"
+            },
+            "detail": {
+                "title": "Salary Component"
+            },
+            "name": "Name",
+            "grossPercent": "Gross Percent",
+            "dateOfJoining": "Date Of Joining",
+            "deduction": "Deduction"
+        }
+    }
+}

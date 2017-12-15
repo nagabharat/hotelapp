@@ -1,0 +1,73 @@
+<div>
+    <h2>
+        <span jhiTranslate="hotelApp.bills.home.title">Bills</span>
+        <button class="btn btn-primary float-right jh-create-entity create-bills-my-suffix" [routerLink]="['/', { outlets: { popup: ['bills-my-suffix-new'] } }]">
+            <span class="fa fa-plus"></span>
+            <span  jhiTranslate="hotelApp.bills.home.createLabel">
+            Create new Bills
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <div class="row">
+    </div>
+    <br/>
+    <div class="table-responsive" *ngIf="bills">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+            <th><span jhiTranslate="global.field.id">ID</span></th>
+            <th><span jhiTranslate="hotelApp.bills.billAmount">Bill Amount</span></th>
+            <th><span jhiTranslate="hotelApp.bills.billdate">Billdate</span></th>
+            <th><span jhiTranslate="hotelApp.bills.billType">Bill Type</span></th>
+            <th><span jhiTranslate="hotelApp.bills.billImage">Bill Image</span></th>
+            <th><span jhiTranslate="hotelApp.bills.filedBy">Filed By</span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let bills of bills ;trackBy: trackId">
+                <td><a [routerLink]="['../bills-my-suffix', bills.id ]">{{bills.id}}</a></td>
+                <td>{{bills.billAmount}}</td>
+                <td>{{bills.billdate | date:'mediumDate'}}</td>
+                <td jhiTranslate="{{'hotelApp.BillType.' + bills.billType}}">{{bills.billType}}</td>
+                <td>
+                    <a *ngIf="bills.billImage" (click)="openFile(bills.billImageContentType, bills.billImage)" jhiTranslate="entity.action.open">open</a>
+                    <span *ngIf="bills.billImage">{{bills.billImageContentType}}, {{byteSize(bills.billImage)}}</span>
+                </td>
+                <td>
+                    <div *ngIf="bills.filedById">
+                        <a [routerLink]="['../employee-my-suffix', bills.filedById  ]" >{{bills.filedById}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['../bills-my-suffix', bills.id ]"
+                                class="btn btn-info btn-sm">
+                            <span class="fa fa-eye"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'bills-my-suffix/'+ bills.id + '/edit'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-primary btn-sm">
+                            <span class="fa fa-pencil"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'bills-my-suffix/'+ bills.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <span class="fa fa-remove"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

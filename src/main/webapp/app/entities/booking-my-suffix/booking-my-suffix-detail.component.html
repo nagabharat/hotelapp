@@ -1,0 +1,44 @@
+
+<div *ngIf="booking">
+    <h2><span jhiTranslate="hotelApp.booking.detail.title">Booking</span> {{booking.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="hotelApp.booking.date">Date</span></dt>
+        <dd>
+            <span>{{booking.date | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span jhiTranslate="hotelApp.booking.startDate">Start Date</span></dt>
+        <dd>
+            <span>{{booking.startDate | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span jhiTranslate="hotelApp.booking.endDate">End Date</span></dt>
+        <dd>
+            <span>{{booking.endDate | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span jhiTranslate="hotelApp.booking.numberOfPeople">Number Of People</span></dt>
+        <dd>
+            <span>{{booking.numberOfPeople}}</span>
+        </dd>
+        <dt><span jhiTranslate="hotelApp.booking.customers">Customers</span></dt>
+        <dd>
+            <div *ngIf="booking.customersId">
+                <a [routerLink]="['/customer-my-suffix', booking.customersId]">{{booking.customersId}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'booking-my-suffix/'+ booking.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

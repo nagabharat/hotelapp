@@ -1,0 +1,70 @@
+<div>
+    <h2>
+        <span jhiTranslate="hotelApp.employeeSalarySlip.home.title">Employee Salary Slips</span>
+        <button class="btn btn-primary float-right jh-create-entity create-employee-salary-slip-my-suffix" [routerLink]="['/', { outlets: { popup: ['employee-salary-slip-my-suffix-new'] } }]">
+            <span class="fa fa-plus"></span>
+            <span  jhiTranslate="hotelApp.employeeSalarySlip.home.createLabel">
+            Create new Employee Salary Slip
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <div class="row">
+    </div>
+    <br/>
+    <div class="table-responsive" *ngIf="employeeSalarySlips">
+        <table class="table table-striped">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="reset.bind(this)">
+            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="gross"><span jhiTranslate="hotelApp.employeeSalarySlip.gross">Gross</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="monthId"><span jhiTranslate="hotelApp.employeeSalarySlip.month">Month</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="employeeId"><span jhiTranslate="hotelApp.employeeSalarySlip.employee">Employee</span> <span class="fa fa-sort"></span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0">
+            <tr *ngFor="let employeeSalarySlip of employeeSalarySlips ;trackBy: trackId">
+                <td><a [routerLink]="['../employee-salary-slip-my-suffix', employeeSalarySlip.id ]">{{employeeSalarySlip.id}}</a></td>
+                <td>{{employeeSalarySlip.gross}}</td>
+                <td>
+                    <div *ngIf="employeeSalarySlip.monthId">
+                        <a [routerLink]="['../month-of-year-my-suffix', employeeSalarySlip.monthId  ]" >{{employeeSalarySlip.monthId}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="employeeSalarySlip.employeeId">
+                        <a [routerLink]="['../employee-my-suffix', employeeSalarySlip.employeeId  ]" >{{employeeSalarySlip.employeeId}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['../employee-salary-slip-my-suffix', employeeSalarySlip.id ]"
+                                class="btn btn-info btn-sm">
+                            <span class="fa fa-eye"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'employee-salary-slip-my-suffix/'+ employeeSalarySlip.id + '/edit'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-primary btn-sm">
+                            <span class="fa fa-pencil"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'employee-salary-slip-my-suffix/'+ employeeSalarySlip.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <span class="fa fa-remove"></span>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,40 @@
+
+<div *ngIf="pettyCash">
+    <h2><span jhiTranslate="hotelApp.pettyCash.detail.title">Petty Cash</span> {{pettyCash.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="hotelApp.pettyCash.pettyCashSettings">Petty Cash Settings</span></dt>
+        <dd>
+            <span jhiTranslate="{{'hotelApp.PettyCashSetting.' + pettyCash.pettyCashSettings}}">{{pettyCash.pettyCashSettings}}</span>
+        </dd>
+        <dt><span jhiTranslate="hotelApp.pettyCash.amount">Amount</span></dt>
+        <dd>
+            <span>{{pettyCash.amount}}</span>
+        </dd>
+        <dt><span jhiTranslate="hotelApp.pettyCash.billdate">Billdate</span></dt>
+        <dd>
+            <span>{{pettyCash.billdate | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span jhiTranslate="hotelApp.pettyCash.filedBy">Filed By</span></dt>
+        <dd>
+            <div *ngIf="pettyCash.filedById">
+                <a [routerLink]="['/employee-my-suffix', pettyCash.filedById]">{{pettyCash.filedById}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'petty-cash-my-suffix/'+ pettyCash.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

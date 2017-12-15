@@ -1,0 +1,23 @@
+{
+    "hotelApp": {
+        "employeeSalary" : {
+            "home": {
+                "title": "Employee Salaries",
+                "createLabel": "Create a new Employee Salary",
+                "createOrEditLabel": "Create or edit a Employee Salary"
+            },
+            "created": "A new Employee Salary is created with identifier {{ param }}",
+            "updated": "A Employee Salary is updated with identifier {{ param }}",
+            "deleted": "A Employee Salary is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Employee Salary {{ id }}?"
+            },
+            "detail": {
+                "title": "Employee Salary"
+            },
+            "gross": "Gross",
+            "changedMonth": "Changed Month",
+            "employee": "Employee"
+        }
+    }
+}

@@ -1,0 +1,10 @@
+{
+    "hotelApp": {
+        "BillType" : {
+            "null": "",
+            "WATER": "WATER",
+            "ELECTRICITY": "ELECTRICITY",
+            "OTHER_BILLS": "OTHER_BILLS"
+        }
+    }
+}
